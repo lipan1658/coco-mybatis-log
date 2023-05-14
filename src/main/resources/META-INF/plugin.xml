@@ -1,18 +1,66 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.lipan1658.cocomybatislog</id>
-    <name>coco-mybatis-log Template</name>
-    <vendor>lipan1658</vendor>
+    <name>coco-mybatis-log</name>
+    <vendor url="https://github.com/lipan1658/coco-mybatis-log">lipan1658</vendor>
+    <idea-version
+            since-build="222" until-build="222.*"/>
+    <description><![CDATA[
+      <h3>English:</h3>
+      <ul>
+      <li>Parse mybatis SQL from the console.</li>
+      <li>By default, the logs in the Debug Console are read first.</li>
+      <li>Limit 30 SQL statements.</li>
+      </ul>
+      <h3>中文：</h3>
+      <ul>
+      <li>从控制台解析mybatis sql。</li>
+      <li>默认先读取Debug Console中的日志。</li>
+      <li>限制30条sql。</li>
+      </ul>
+    ]]></description>
+
+
+    <change-notes><![CDATA[
+        <h3>English:</h3>
+        <h4>0.0.1</h4>
+        <ul>
+            <li>Parse mybatis SQL from the console.</li>
+        </ul>
+        <h3>中文:</h3>
+        <h4>0.0.1</h4>
+        <ul>
+            <li>Parse mybatis SQL from the console.</li>
+        </ul>
+    ]]></change-notes>
 
     <depends>com.intellij.modules.platform</depends>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.lipan1658.cocomybatislog.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <toolWindow
+                icon="AllIcons.Actions.IntentionBulb"
+                factoryClass="com.coco.mybatis.log.toolwindow.ToolWindowFactoryImpl"
+                id="CocoMybatisLog"
+                anchor="bottom"
+        />
     </extensions>
 
+    <actions>
+        <group id="CocoMybatisLog.ToolBarActions.left" text="Actions" popup="true">
+            <action id="CocoMybatisLog.Start"
+                    class="com.coco.mybatis.log.actions.ExecuteAction"
+                    icon="AllIcons.Actions.Execute">
+            </action>
+            <action id="CocoMybatisLog.Clear"
+                    class="com.coco.mybatis.log.actions.ClearAction"
+                    icon="AllIcons.Actions.Cancel">
+            </action>
+        </group>
+    </actions>
+
     <applicationListeners>
-        <listener class="com.github.lipan1658.cocomybatislog.listeners.MyFrameStateListener" topic="com.intellij.ide.FrameStateListener"/>
+<!--        <listener class="com.github.lipan1658.cocomybatislog.listeners.MyFrameStateListener" topic="com.intellij.ide.FrameStateListener"/>-->
     </applicationListeners>
 </idea-plugin>
