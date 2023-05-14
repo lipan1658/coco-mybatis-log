@@ -9,16 +9,26 @@
       <h3>English:</h3>
       <ul>
       <li>Parse mybatis SQL from the console.</li>
+      <li>By default, the logs in the Debug Console are read first.</li>
+      <li>Limit 30 SQL statements.</li>
       </ul>
       <h3>中文：</h3>
       <ul>
       <li>从控制台解析mybatis sql。</li>
+      <li>默认先读取Debug Console中的日志。</li>
+      <li>限制30条sql。</li>
       </ul>
     ]]></description>
 
 
     <change-notes><![CDATA[
-        <h2>0.0.1</h2>
+        <h3>English:</h3>
+        <h4>0.0.1</h4>
+        <ul>
+            <li>Parse mybatis SQL from the console.</li>
+        </ul>
+        <h3>中文:</h3>
+        <h4>0.0.1</h4>
         <ul>
             <li>Parse mybatis SQL from the console.</li>
         </ul>

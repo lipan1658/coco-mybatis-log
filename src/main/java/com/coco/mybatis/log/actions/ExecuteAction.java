@@ -72,8 +72,8 @@ public class ExecuteAction extends DumbAwareAction {
         List<String> sqlStringListNew;
         List<String> parametersListNew;
         if(sqlStringList.size() > 30){
-            sqlStringListNew = sqlStringList.subList(0,30);
-            parametersListNew = parametersList.subList(0,30);
+            sqlStringListNew = sqlStringList.subList(sqlStringList.size()-30,sqlStringList.size());
+            parametersListNew = parametersList.subList(parametersList.size()-30,parametersList.size());
         }else{
             sqlStringListNew = sqlStringList;
             parametersListNew = parametersList;
