@@ -101,6 +101,7 @@ public class ExecuteAction extends DumbAwareAction {
 //                split[j] = split[j].replace(split[j].substring(begin, end+1),"");
                 if(split[j].contains("Long") || split[j].contains("Integer") || split[j].contains("BigDecimal")
                         || split[j].contains("Float") || split[j].contains("Double")){
+
                     split[j] = split[j].replace(split[j].substring(begin, end+1),"");
                     sqlString = sqlString.replaceFirst(regex, split[j].trim());
                 }else{
