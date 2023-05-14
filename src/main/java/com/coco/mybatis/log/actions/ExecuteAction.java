@@ -69,6 +69,19 @@ public class ExecuteAction extends DumbAwareAction {
                 parametersList.add(o);
             }
         });
+        List<String> sqlStringListNew;
+        List<String> parametersListNew;
+        if(sqlStringList.size() > 30){
+            sqlStringListNew = sqlStringList.subList(0,30);
+            parametersListNew = parametersList.subList(0,30);
+        }else{
+            sqlStringListNew = sqlStringList;
+            parametersListNew = parametersList;
+        }
+        print(consoleView, sqlStringListNew, parametersListNew);
+    }
+
+    private void print(ConsoleView consoleView, List<String> sqlStringList, List<String> parametersList) {
         String sqlString;
         String parameters;
         for (int i = 0; i < sqlStringList.size(); i++) {
@@ -83,21 +96,19 @@ public class ExecuteAction extends DumbAwareAction {
             String[] split = parameters.split(",");
             int count = count(sqlString, "?");
             for(int j=0;j<count;j++){
-                if(split[j].contains("Long")){
-                    split[j] = split[j].replace("(Long)","");
-                    sqlString = sqlString.replaceFirst(regex, split[j]);
-                }else if(split[0].contains("Integer")){
-                    split[j] = split[j].replace("(Integer)","");
-                    sqlString = sqlString.replaceFirst(regex, split[j]);
-                }else{
-                    int begin = split[j].indexOf("(");
-                    int end = split[j].indexOf(")");
+                int begin = split[j].indexOf("(");
+                int end = split[j].indexOf(")");
+//                split[j] = split[j].replace(split[j].substring(begin, end+1),"");
+                if(split[j].contains("Long") || split[j].contains("Integer") || split[j].contains("BigDecimal")
+                        || split[j].contains("Float") || split[j].contains("Double")){
                     split[j] = split[j].replace(split[j].substring(begin, end+1),"");
-                    sqlString = sqlString.replaceFirst(regex, "'"+split[j]+"'");
+                    sqlString = sqlString.replaceFirst(regex, split[j].trim());
+                }else{
+                    split[j] = split[j].replace(split[j].substring(begin, end+1),"");
+                    sqlString = sqlString.replaceFirst(regex, "'"+split[j].trim()+"'");
                 }
             }
             consoleView.print("sql: "+sqlString+"\n\n", ConsoleViewContentType.LOG_DEBUG_OUTPUT);
-
         }
     }
 
